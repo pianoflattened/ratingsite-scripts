@@ -1,0 +1,499 @@
+header:not(.fa):not(tt) {
+    font-family: Trebuchet MS, Arial, Sans-Serif !important;
+    font-size: 1.6969696969em !important;
+}
+body {
+    font-family: Arial, Sans-Serif;
+    font-size: 10px;
+    background-color: var(--mono-f);
+}
+#navtop {
+    background: #f8f8f8;
+}
+#navtop {
+    background: #080808;
+}
+.spoiler {
+    border: 1px solid #522;
+    color: #fcc;
+    background-color: #802020;
+}
+.musictoolbar a {
+    padding: 0.1rem 0.4rem;
+}
+.musictoolbar {
+    margin-bottom: 1rem;
+}
+.profilesearch ~ .clear ~ .musictoolbar {
+    margin-bottom: -0.5rem;
+}
+.comment {
+    font-size: 1em !important;
+}
+html.size_mode_smaller #content {
+    font-size: 1.15em;
+}
+#page_chart_main,
+.avg_rating {
+    font-size: 1.1em;
+}
+#my_catalog {
+    font-size: 1.111111111111111111111111111111111111111111111111em !important;
+}
+ul.lists {
+    font-size: 0.95em;
+}
+.review_body {
+    line-height: 1.5em;
+}
+#my_review,
+div[id^="rating_num_"],
+ul.tracks li.track {
+    font-size: 0.9em;
+}
+.section_tracklisting {
+    font-size: 12px;
+}
+input:not(#ui_search_input_main_search):not(.review_shortcut),
+select,
+textarea {
+    font-size: 12.5px;
+    font-family: Arial, Sans-Serif;
+}
+input {
+    font-family: Arial, Sans-Serif;
+}
+#ui_search_main_search * {
+    transform: translateY(-1px);
+}
+.ui_search_rest {
+    transform: translateY(2px);
+}
+#ui_search_main_search {
+    transform: translateY(2px);
+}
+#content_cover,
+#overlay_invisible,
+.clearfix,
+.dfp_300_float_right,
+.page_ads_creative_frame,
+.page_chart_400_300_ad,
+.page_chart_nav_top,
+.page_home_intro_content_logo,
+.page_home_intro_content_text-sub,
+.page_home_section_header {
+    display: none !important;
+}
+.page_home_intro {
+    max-width: 100em;
+    margin-top: 1em;
+}
+#content {
+    padding-top: 0;
+    max-width: 130em;
+}
+.page_stats {
+    margin-top: 0;
+    max-width: 100em;
+}
+.ui_featured_content_review .page_feature_main_info {
+    margin-bottom: 5px !important;
+}
+.page_feature_title {
+    margin-bottom: 5px;
+    line-height: 0.6;
+}
+.page_feature_artist {
+    line-height: 1.3;
+}
+.page_review_feature_author {
+    margin-bottom: 5px;
+    opacity: 0.6;
+    transition-duration: 0.2s;
+}
+.page_review_feature_author:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+.page_review_feature_rating {
+    margin-bottom: 5px;
+}
+.page_review_feature_title {
+    margin-bottom: 5px;
+}
+.ui_stream_links {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+.page_features_secondary_metadata_field {
+    margin-bottom: 5px;
+}
+.ui_stream_links_container {
+    height: auto;
+}
+#page_chart_main {
+    margin: 0 !important;
+    max-width: 130em;
+}
+.page_chart_custom_chart_ui {
+    float: left;
+    width: 35% !important;
+}
+.chart_results {
+    width: 60%;
+    float: right;
+}
+#ui_pagination_page_chart_bottom {
+    top: 92%;
+    right: 70%;
+    position: fixed;
+}
+.page_chart_query_radio_group {
+    width: 100%;
+    padding-bottom: 35px;
+}
+.page_chart_custom_charts,
+.page_chart_query_advanced {
+    margin-top: 5px;
+}
+.page_chart_query_free_section_new {
+    margin-top: 10px;
+}
+.page_chart_header {
+    opacity: 0;
+    font-size: 5px;
+}
+.topcharts_item_title {
+    line-height: 1.2;
+}
+.topcharts_item_releasedate {
+    line-height: 1.2;
+}
+.topcharts_position {
+    grid-area: inherit !important;
+}
+.topcharts_item_art_crop {
+    padding-bottom: 10em !important;
+    padding-right: 4em !important;
+}
+.topcharts_item_medialinkbox {
+    margin-top: 3em;
+}
+.topcharts_itembox {
+    padding: 10px !important;
+}
+.disco_mainline b a {
+    color: #b3ffb3 !important;
+}
+.disco_cat_inner {
+    color: #b3ffb3 !important;
+}
+.artist_name_hdr {
+    font-size: 30pt !important;
+    font-weight: 700 !important;
+}
+.section_artist_name {
+    padding-bottom: 5px;
+}
+.section_artist_info {
+    max-height: 54px;
+    overflow: hidden;
+    transition-duration: 0.5s;
+    border: 1px solid var(--mono-c);
+    margin: 5px;
+    margin-left: 35px;
+    margin-right: 35px;
+    border-radius: 15px 15px 0 0;
+    background-color: var(--mono-e);
+    padding: 10px !important;
+    cursor: zoom-in;
+}
+.section_artist_info:hover {
+    max-height: 100em;
+    border-radius: 15px;
+    border: 1px solid var(--mono-e);
+}
+.info_content {
+    margin: 0 !important;
+    margin-bottom: 5px !important;
+}
+.disco_release {
+    height: 2.05em !important;
+    line-height: 1 !important;
+}
+.disco_mainline {
+    height: 1em !important;
+    line-height: 0.9;
+}
+.disco_rel_img,
+.disco_rel_no_img {
+    height: 2.05em;
+    width: 2.05em;
+    background-size: 2.1em 2.1em !important;
+    border-radius: 4px !important;
+}
+.disco_ratings,
+.disco_reviews {
+    line-height: 2.3 !important;
+}
+.disco_avg_rating {
+    line-height: 1.6;
+}
+.disco_cat,
+.expand_arrow,
+.expand_num {
+    height: 35px !important;
+    border-radius: 0;
+}
+.disco_cat {
+    line-height: 2.4 !important;
+    width: 9em;
+    border-radius: 15px;
+    height: 2.4em !important;
+}
+.disco_expandissues,
+.disco_header_issues {
+    display: none;
+}
+.disco_expandcat * {
+    background-color: transparent;
+    transition-duration: 0.2s;
+}
+.page_new_releases_list .newreleases_itembox {
+    width: 100% !important;
+}
+a {
+    transition-duration: 0.2s;
+}
+.page_feature_art img {
+    border-radius: 15px;
+    opacity: 0.75;
+    transition-duration: 0.1s;
+}
+.page_feature_art img:hover {
+    opacity: 0.95;
+}
+#ui_search_object_select_main_search {
+    cursor: pointer;
+}
+#content_wrapper {
+    background-color: var(--mono-f);
+}
+.ui_featured_content_review {
+    border-radius: 15px;
+    padding-bottom: 0;
+}
+.page_home_section_featured_content_content_item_banner {
+    color: #44c6ea;
+    margin: 15px;
+    background-color: transparent !important;
+    box-shadow: none;
+    transition-duration: 0.2s;
+}
+.page_home_section_featured_content_content_item_banner:hover {
+    color: var(--gen-blue-darkest);
+}
+#content {
+    margin-top: 5rem;
+}
+html {
+    background-color: var(--mono-f);
+}
+.section_artist_discography {
+    font-size: 1.0666666666666666666666666667em;
+}
+.catalog_header div:first-child,
+.comment_img {
+    background-color: #000 !important;
+}
+.page_list_note_num_views ~ .clear ~ .row {
+    margin-top: 1em;
+}
+.page_list_note_num_views {
+    padding: 0.5rem 0.5rem;
+}
+.section_artist_image a,
+.section_artist_image a div,
+.voting_tip {
+    color: #fff !important;
+}
+tr[id^="rec_"] td:nth-child(2) div:nth-child(2) {
+    background: var(--mono-d) !important;
+}
+.smallbutton {
+    padding: 0.33333rem 0.66667rem;
+}
+.wiki_sheader,
+.wiki_surl {
+    background-color: var(--mono-ef) !important;
+}
+#ui_pagination_page_chart_bottom {
+    background: rgba(24, 24, 24, 0.9);
+    z-index: 10000000;
+    padding: 0.15em 0.333em;
+    border-radius: 5px;
+    transform: translateX(59px);
+}
+.notification {
+    overflow-x: hidden;
+}
+.notification a.btn_xsmall {
+    padding: 1px 3px;
+}
+.notification br:nth-child(4) {
+    display: none;
+}
+.notification td {
+    /*line-height: 1.33333rem;*/
+    padding-bottom: 5px;
+}
+.notification span.smallgray {
+    display: inline-block;
+    margin-bottom: 8px;
+}
+footer {
+    border-top: 0;
+}
+#shoutbox_dummybutton {
+    border: 0;
+}
+#allNotifications > table > tbody > tr:nth-child(1) > td {
+    padding: 0;
+    padding-bottom: 4px;
+}
+#content > table > tbody > tr > td > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(2) > div > table:nth-child(4) td {
+    padding: 7px 0;
+}
+/*#content > table > tbody > tr > td > div:nth-child(2) > table > tbody > tr:nth-child(1) > td:nth-child(2) > div > table:nth-child(1) {*/
+/*    font-size: 11.5px;*/
+/*}*/
+a.film_artist {
+    font-weight: 700;
+}
+body.has_background_image {
+    background-image: none !important;
+}
+
+.topcharts_item_art_crop {
+    padding-bottom: 15em !important;
+}
+.release_right_column .page_section {
+    max-width: none;
+    margin: none;
+}
+.btn,
+input[type="button"],
+input[type="submit"] {
+    line-height: inherit;
+    font-size: inherit;
+}
+.profile_set_listening_btn .btn {
+    padding: 0.25em 1.5em;
+}
+table.mbgen td:last-child {
+    padding: 0.5em;
+}
+.ui_search_type {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: inherit;
+}
+.album_title {
+    font-family: inherit !important;
+}
+.smallcomment_area {
+    overflow-x: scroll;
+}
+#shoutbox_commentarea {
+    max-width: 460px;
+}
+::-webkit-scrollbar {
+    width: 0;
+    background: 0 0;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--mono-ef);
+    border: 4px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}
+
+#content > div.release_page > div:nth-child(4) > div > div.large-8.push-4.columns.release_right_column > div.section_main_info.section_outer > div > table.album_info_outer > tbody > tr > td:nth-child(2) {
+	display: none;
+}
+
+span[title="shortcut"] {
+	display: none;
+}
+
+.page_search_results {
+	padding-left: 5em;
+	margin-right: 10em;
+}
+
+img[src="https://www.gstatic.com/images/icons/material/system/1x/warning_amber_24dp.png"] {}
+
+.artist_page_section_nav {
+	display: block;
+}
+
+.rymzilla_summary tr.pr4, tr.pr4 a {
+	background-color: var(--mono-d)!important;
+}
+
+div.bubble_content tr:has-child(td) {
+	backgroud-color: var(--mono-f)!important;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999999999999999999999999!important;
+}
+
+.abuse_banner {
+    max-height: calc(100vh - 10em);
+    overflow: auto;
+	padding: 2em;
+    background: var(--mono-e);
+    max-width: 50em;
+    margin: 0 auto;
+    margin-top: 4em;
+    background: eee;
+    border: 5px solid rgba(128,128,128,0.5);
+    border-radius: 5px;
+}
+
+.btn.blue_btn {
+	background: #1c5588!important;
+}
+
+td#follow_user a {
+	background: #c2c2c2;
+	color: #1c5588;
+}
+
+td#follow_user a[title^=Follow] {
+	background: var(--btn-secondary-background-default);
+	color: var(--btn-secondary-text);
+}
+
+#page_genre_description_short {
+	display: none;
+}
+
+#page_genre_description_full {
+	display: block!important;
+}
+
+.btn, input[type=button], input[type=submit] {
+	font-family: inherit!important;
+}
+
+.ui_browser_list_item_buttons a {
+	font-size: 11px;
+}
