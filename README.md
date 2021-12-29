@@ -21,7 +21,7 @@ https://raw.githubusercontent.com/pianoflattened/ratingsite-scripts/main/all.js 
 https://raw.githubusercontent.com/pianoflattened/ratingsite-scripts/main/style.css <br>
 
 ## "i only want some features" <--- what to do if you are this guy
-i do not have the time 2 compartamentalize the marginally volumous css but the more evil parts of the javascript stuff is sectioned off and you can use this without those as follows:
+i do not have the time 2 compartamentalize the marginally volumous css but the more evil parts of the javascript stuff is sectioned off and you can use th scripts without those as follows:
 
 - download the repo however you want not super important
 - open up main.js + the files you want to incorporate in some text editor
