@@ -497,3 +497,11 @@ td#follow_user a[title^=Follow] {
 .ui_browser_list_item_buttons a {
 	font-size: 11px;
 }
+
+.chart_results {
+	margin-left: 2rem;
+}
+
+.review:has(.review_featured) {
+	display: none;
+}
