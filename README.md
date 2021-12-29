@@ -25,8 +25,8 @@ i do not have the time 2 compartamentalize the marginally volumous css but the m
 
 - download the repo however you want not super important
 - open up main.js + the files you want to incorporate in some text editor
-- put the parts in the auxiliary files labelled INSIDE where it says to do so in main.js
-- put the parts in the auxiliary files labelled OUTSIDE where it says to do so in main.js
+- put the parts in the auxiliary files labelled `INSIDE` where it says to do so in `main.js`
+- put the parts in the auxiliary files labelled `OUTSIDE` where it says to do so in `main.js`
 - paste the result into whatever browser script thing yr using
 
 it is exactly six steps easy, so pretty easy
