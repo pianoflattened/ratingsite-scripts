@@ -12,6 +12,6 @@ customizations i use for rym. theyre kind of evil sorry. ive been maintaining th
 \- removes featured reviews from release pages. in the future i plan to just move it down if possible but after recently glancing quickly at how theyre implemented it'll probably be more time than it's worth
 \- removes rym box set lists. self explanatory
 
-urls for css/js managers that take them:
-https://raw.githubusercontent.com/pianoflattened/ratingsite-scripts/main/all.js
-https://raw.githubusercontent.com/pianoflattened/ratingsite-scripts/main/style.css
+urls for css/js managers that take them:<br>
+https://raw.githubusercontent.com/pianoflattened/ratingsite-scripts/main/all.js <br>
+https://raw.githubusercontent.com/pianoflattened/ratingsite-scripts/main/style.css <br>
