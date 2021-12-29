@@ -14,7 +14,7 @@ customizations i use for rym. theyre kind of evil sorry. ive been maintaining th
 \- removes rym box set lists. self explanatory<br>
 
 ## using these
-i used [user javascript and css](https://chrome.google.com/webstore/detail/user-javascript-and-css/nbhcbdghipllgmfilhnhkllmkecfmpld) on chrome. when i (finally lol) swtiched to firefox i settled with [custom style script](https://addons.mozilla.org/en-US/firefox/addon/custom-style-script). it likely does not matter which one you use as long as you can figure out how (i will not be telling you)
+i used [user javascript and css](https://chrome.google.com/webstore/detail/user-javascript-and-css/nbhcbdghjpllgmfilhnhkllmkecfmpld) on chrome. when i (finally lol) swtiched to firefox i settled with [custom style script](https://addons.mozilla.org/en-US/firefox/addon/custom-style-script). it likely does not matter which one you use as long as you can figure out how (i will not be telling you)
 
 urls for css/js managers that take them:<br>
 https://raw.githubusercontent.com/pianoflattened/ratingsite-scripts/main/all.js <br>
