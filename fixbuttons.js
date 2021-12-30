@@ -1,5 +1,5 @@
 // OUTSIDE
-var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\);/g;
+var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 
 // INSIDE
 $("[onclick^=rymQ]").attr("onclick", function(i, value) {

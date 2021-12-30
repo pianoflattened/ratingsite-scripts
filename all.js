@@ -54,7 +54,7 @@ var getBox = function(e, i={}) {
 };
 
 var rymboxset = /http(s|):\/\/rateyourmusic.com\/list\/[A-Za-z0-9_]+\/rym[-_](ultimate[-_]|)box[-_]set/;
-var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\);/g;
+var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 
 window.addEventListener('DOMContentLoaded', function() {
 	setTimeout(function() {
@@ -116,9 +116,9 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 		
 		$("[onclick^=rymQ]").attr("onclick", function(i, value) {
-			// this looks scary refer to this 
-			// https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression
-			return [...value.matchAll(rymQre)].map(m => m[1])[0].trim();
-		});
+            // this looks scary refer to this 
+            // https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression
+            return [...value.matchAll(rymQre)].map(m => m[1])[0].trim();
+        });
 	}, 5000);
 });
