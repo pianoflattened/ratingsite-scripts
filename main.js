@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', setTimeout(function() {
     let chartslink = $("div.header_charts");
     let newcharts = chartslink.clone(true, true);
     chartslink.remove();
-    newcharts.insertBefore("div.header_links a.header_item:nth-child(2)");
+    newcharts.insertAfter("div.header_links a.header_item:nth-child(2)");
     
     if (window.location.href.includes("rateyourmusic.com/search")) {
         $('column_container_left').removeClass("large-8");
