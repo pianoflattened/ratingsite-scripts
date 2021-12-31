@@ -17,8 +17,8 @@ customizations i use for rym. theyre kind of evil sorry. ive been maintaining th
 i used [user javascript and css](https://chrome.google.com/webstore/detail/user-javascript-and-css/nbhcbdghjpllgmfilhnhkllmkecfmpld) on chrome. when i (finally lol) swtiched to firefox i settled with [custom style script](https://addons.mozilla.org/en-US/firefox/addon/custom-style-script). it likely does not matter which one you use as long as you can figure out how (i will not be telling you)
 
 urls for css/js managers that take them:<br>
-https://cdn.jsdelivr.net/gh/pianoflattened/ratingsite-scripts/all.js <br>
-https://cdn.jsdelivr.net/gh/pianoflattened/ratingsite-scripts/style.css <br>
+https://cdn.jsdelivr.net/gh/pianoflattened/ratingsite-scripts@v1.0.2/all.js <br>
+https://cdn.jsdelivr.net/gh/pianoflattened/ratingsite-scripts@v1.0.2/style.css <br>
 
 ## "i only want some features" <--- what to do if you are this guy
 i do not have the time 2 compartamentalize the marginally volumous css but the more evil parts of the javascript stuff is sectioned off and you can use th scripts without those as follows:
