@@ -114,9 +114,6 @@ window.addEventListener('DOMContentLoaded', function() {
 	if (window.location.href.includes("rateyourmusic.com/release")) {
 		$(".review:has(.review_featured)").remove(); // lol maybe move it instead
 	}
-	
-	/**/
-// <div style="position:absolute;margin-top:1rem;">hey</div>
 
 	if (window.location.href.includes("rateyourmusic.com/~")) {
 		console.log("usr");
