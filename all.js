@@ -173,7 +173,7 @@ window.addEventListener('DOMContentLoaded', function() {
 						</a>
 					</li>
 					<li>
-						<a id='follow_private' class='btn tool_btn' style='color: var(--btn-secondary-text); background: var(--btn-secondary-background-default);' onclick='let u = $("span#profilename").text(); ldb.get("__pfollow_users", function(v){if(v===null){ldb.set("__pfollow_users",[u]);} else {ldb.set("__pfollow_users",v.concat([u]))}});'>
+						<a id='follow_private' class='btn tool_btn' style='color: var(--btn-secondary-text); background: var(--btn-secondary-background-default);' onclick='let u = $("span#profilename").text(); ldb.get("__pfollow_users", function(v){ if(v === null){ldb.set("__pfollow_users",[u]);} else {ldb.set("__pfollow_users", v.concat([u]))} });'>
 							follow privately
 						</a>
 					</li>
