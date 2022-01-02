@@ -57,7 +57,7 @@ var getBox = function(e, i={}) {
 var rymboxset = /http(s|):\/\/rateyourmusic.com\/list\/[A-Za-z0-9_]+\/rym[-_](ultimate[-_]|)box[-_]set/;
 var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 
-//window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function() {
 //	setTimeout(function() {
 	console.log("hey"); // bunch of aesthetic changes here that i couldnt do or would be annoying to do with css
 
@@ -141,4 +141,4 @@ var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 		$("a#follow_public").attr("onclick", follow_js);
 	}
 //	}, 5000);
-//});
+});
