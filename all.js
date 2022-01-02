@@ -1,3 +1,6 @@
+//indexdb
+!function(){var r,c,e=window.indexedDB||window.mozIndexedDB||window.webkitIndexedDB||window.msIndexedDB;e?(c={k:"",v:""},(e=e.open("d2",1)).onsuccess=function(e){r=this.result},e.onerror=function(e){console.error("indexedDB request error"),console.log(e)},e.onupgradeneeded=function(e){r=null,e.target.result.createObjectStore("s",{keyPath:"k"}).transaction.oncomplete=function(e){r=e.target.db}},window.ldb={get:function e(t,n){r?r.transaction("s").objectStore("s").get(t).onsuccess=function(e){e=e.target.result&&e.target.result.v||null,n(e)}:setTimeout(function(){e(t,n)},100)},set:function(e,t,n){c.k=e,c.v=t;let o=r.transaction("s","readwrite");o.oncomplete=function(e){"Function"==={}.toString.call(n).slice(8,-1)&&n()},o.objectStore("s").put(c),o.commit()}}):console.error("indexDB not supported")}();
+
 var $ = window.$;
 
 // !! place everything under OUTSIDE here
@@ -54,13 +57,12 @@ var getBox = function(e, i={}) {
 var rymboxset = /http(s|):\/\/rateyourmusic.com\/list\/[A-Za-z0-9_]+\/rym[-_](ultimate[-_]|)box[-_]set/;
 var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 
-window.addEventListener('DOMContentLoaded', function() {
+//window.addEventListener('DOMContentLoaded', function() {
 //	setTimeout(function() {
 	console.log("hey"); // bunch of aesthetic changes here that i couldnt do or would be annoying to do with css
 
 	// forgot what this does but its def something important. leave it here
-	$(':root').css('--ui-detail-neutral', '#4a4c52');
-	$(':root').css('--ui-divider-line', '#4a4c52');
+	$(':root').css('--ui-detail-neutral', '#4a4c52').css('--ui-divider-line', '#4a4c52');
 	
 	// move the charts link bc it switched places with the genre one and i was clicking it habitually
 	let chartslink = $("div.header_charts");
@@ -112,5 +114,31 @@ window.addEventListener('DOMContentLoaded', function() {
 	if (window.location.href.includes("rateyourmusic.com/release")) {
 		$(".review:has(.review_featured)").remove(); // lol maybe move it instead
 	}
+	
+	/**/
+// <div style="position:absolute;margin-top:1rem;">hey</div>
+
+	if (window.location.href.includes("rateyourmusic.com/~")) {
+		console.log("usr");
+		let follow_btn = $("a.btn.tool_btn[title='Follow User']");
+		let follow_js = follow_btn.attr("onclick");
+		follow_btn.removeAttr("onclick").click(function() {
+			$(this).parent().append($(`<div style='position:absolute;margin-top:1rem;'>
+				<ul style='text-align: start;'>
+					<li>
+						<a id='follow_public' class='btn tool_btn' style='color:var(--btn-secondary-text);background:var(--btn-secondary-background-default);'>
+							follow publicly
+						</a>
+					</li>
+					<li>
+						<a id='follow_private' class='btn tool_btn' style='color:var(--btn-secondary-text);background:var(--btn-secondary-background-default);' onclick='console.log("h");let u=$("span#profilename").text();ldb.get("__pfollow_users",function(v){if(v===null){ldb.set("__pfollow_users",[u]);}else{ldb.set("__pfollow_users",v.concat([u]))}});'>
+							follow privately
+						</a>
+					</li>
+				</ul>
+			</div>`));
+		});
+		$("a#follow_public").attr("onclick", follow_js);
+	}
 //	}, 5000);
-});
+//});
