@@ -55,6 +55,49 @@ var getBox = function(e, i={}) {
 	}
 };
 
+var remove_follow_menu = function() {
+	$("div#follow_menu").remove();
+	$("a.btn.tool_btn[title='Follow User']").attr("onclick", "make_follow_menu();");
+};
+
+var make_follow_menu = function() {
+	let follow_btn = $("a.btn.tool_btn[title='Follow User']");
+	let follow_js = "let r = function(){"+follow_btn.attr("onclick")+"}();remove_follow_menu();return r;";
+	let follow_menu = $(`<div id='follow_menu' style='position: absolute; margin-top: 1rem;'>
+		<ul style='text-align: start; list-style: none;'>
+			<li>
+				<a id='follow_public' class='btn tool_btn' style='color:var(--btn-secondary-text);background:var(--btn-secondary-background-default);' onclick="` + follow_js + `"></a>
+			</li>
+			<li>
+				<a id='follow_private' class='btn tool_btn' style='color: var(--btn-secondary-text); background: var(--btn-secondary-background-default);' onclick=''></a>
+			</li>
+		</ul>
+	</div>`);
+	
+	// come up with a better test
+	if (follow_js.includes("Are you sure you want to follow this user?")) {
+		follow_menu.find('a#follow_public').text('follow publicly');
+	} else {
+		follow_menu.find('a#follow_public').text('unfollow publicly');
+	}
+	
+	let u = $("span#profilename").text();
+	ldb.get("__pfollow_users", function(v){
+		if(v === null){
+			follow_menu.find('a#follow_private').attr("onclick", 'ldb.set("__pfollow_users", ['+u+']);remove_follow_menu();');
+		} else {
+			if (v.includes(u)) {
+				follow_menu.find('a#follow_private').attr("onclick", 'ldb.set("__pfollow_users", '+JSON.stringify(v)+'.filter(e => e !== '+u+'));remove_follow_menu();').text("unfollow privately");
+			} else {
+				follow_menu.find('a#follow_private').attr("onclick", 'ldb.set("__pfollow_users", '+JSON.stringify(v)+'.concat(['+u+']));remove_follow_menu();').text("follow privately");
+			}
+		}
+	});
+	
+	follow_btn.parent().append(follow_menu);
+	follow_btn.attr("onclick", "remove_follow_menu();");
+};
+
 var rymboxset = /http(s|):\/\/rateyourmusic.com\/list\/[A-Za-z0-9_]+\/rym[-_](ultimate[-_]|)box[-_]set/;
 var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 
@@ -161,25 +204,12 @@ window.addEventListener('DOMContentLoaded', function() {
 	}
 
 	if (window.location.href.includes("://rateyourmusic.com/~")) {
+		window.make_follow_menu = make_follow_menu;
+		window.remove_follow_menu = remove_follow_menu;
+		window.refresh_follow_menu = refresh_follow_menu;
+		
 		console.log("usr");
-		let follow_btn = $("a.btn.tool_btn[title='Follow User']");
-		let follow_js = follow_btn.attr("onclick");
-		follow_btn.removeAttr("onclick").click(function() {
-			$(this).parent().append($(`<div style='position: absolute; margin-top: 1rem;'>
-				<ul style='text-align: start; list-style: none;'>
-					<li>
-						<a id='follow_public' class='btn tool_btn' style='color:var(--btn-secondary-text);background:var(--btn-secondary-background-default);' onclick="` + follow_js + `">
-							follow publicly
-						</a>
-					</li>
-					<li>
-						<a id='follow_private' class='btn tool_btn' style='color: var(--btn-secondary-text); background: var(--btn-secondary-background-default);' onclick='let u = $("span#profilename").text(); ldb.get("__pfollow_users", function(v){ if(v === null){ldb.set("__pfollow_users",[u]);} else {ldb.set("__pfollow_users", v.concat([u]))} });'>
-							follow privately
-						</a>
-					</li>
-				</ul>
-			</div>`));
-		});
+		$("a.btn.tool_btn[title='Follow User']").attr("onclick", "make_follow_menu();");
 	}
 //	}, 5000);
 });
