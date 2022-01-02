@@ -139,7 +139,7 @@ window.addEventListener('DOMContentLoaded', function() {
 					TELL SOMEONE IN YOUR COUNTRY THAT I AM GAY AND IM SO EMO THAT WHEN I SAY 
 					HORRIBLE DEATH THEY WILL FORGET ALL OF IT BECAUSE I
 				</span>
-				<div style="text-align:center; margin:1.5em; ">
+				<div style="text-align:center; margin:1.5em;">
 					<a onclick="this.parentNode.parentNode.parentNode.remove();" class="btn blue_btn">I want to see this list anyway</a>
 				</div>
 			</div>
