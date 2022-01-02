@@ -1,6 +1,7 @@
-//indexdb
+// https://github.com/DVLP/localStorageDB
 !function(){var r,c,e=window.indexedDB||window.mozIndexedDB||window.webkitIndexedDB||window.msIndexedDB;e?(c={k:"",v:""},(e=e.open("d2",1)).onsuccess=function(e){r=this.result},e.onerror=function(e){console.error("indexedDB request error"),console.log(e)},e.onupgradeneeded=function(e){r=null,e.target.result.createObjectStore("s",{keyPath:"k"}).transaction.oncomplete=function(e){r=e.target.db}},window.ldb={get:function e(t,n){r?r.transaction("s").objectStore("s").get(t).onsuccess=function(e){e=e.target.result&&e.target.result.v||null,n(e)}:setTimeout(function(){e(t,n)},100)},set:function(e,t,n){c.k=e,c.v=t;let o=r.transaction("s","readwrite");o.oncomplete=function(e){"Function"==={}.toString.call(n).slice(8,-1)&&n()},o.objectStore("s").put(c),o.commit()}}):console.error("indexDB not supported")}();
 
+// jquery
 var $ = window.$;
 
 // !! place everything under OUTSIDE here
@@ -84,7 +85,7 @@ window.addEventListener('DOMContentLoaded', function() {
 					<center>
 						<h5>
 							<b>
-								<span style="color:crimson" class="rendered_text_color">
+								<span style="color: crimson" class="rendered_text_color">
 									<span class="rendered_text_color_inner">
 										<i class="fas fa-exclamation-triangle"></i>&nbsp;THIS LIST IS AN RYM ULTIMATE BOX SET LIST&nbsp;<i class="fas fa-exclamation-triangle"></i>
 									</span>
@@ -164,15 +165,15 @@ window.addEventListener('DOMContentLoaded', function() {
 		let follow_btn = $("a.btn.tool_btn[title='Follow User']");
 		let follow_js = follow_btn.attr("onclick");
 		follow_btn.removeAttr("onclick").click(function() {
-			$(this).parent().append($(`<div style='position:absolute;margin-top:1rem;'>
-				<ul style='text-align: start;'>
+			$(this).parent().append($(`<div style='position: absolute; margin-top: 1rem;'>
+				<ul style='text-align: start; list-style: none;'>
 					<li>
 						<a id='follow_public' class='btn tool_btn' style='color:var(--btn-secondary-text);background:var(--btn-secondary-background-default);' onclick="` + follow_js + `">
 							follow publicly
 						</a>
 					</li>
 					<li>
-						<a id='follow_private' class='btn tool_btn' style='color:var(--btn-secondary-text);background:var(--btn-secondary-background-default);' onclick='let u=$("span#profilename").text();ldb.get("__pfollow_users",function(v){if(v===null){ldb.set("__pfollow_users",[u]);}else{ldb.set("__pfollow_users",v.concat([u]))}});'>
+						<a id='follow_private' class='btn tool_btn' style='color: var(--btn-secondary-text); background: var(--btn-secondary-background-default);' onclick='let u = $("span#profilename").text(); ldb.get("__pfollow_users", function(v){if(v===null){ldb.set("__pfollow_users",[u]);} else {ldb.set("__pfollow_users",v.concat([u]))}});'>
 							follow privately
 						</a>
 					</li>
