@@ -55,18 +55,17 @@ var getBox = function(e, i={}) {
 	}
 };
 
-var remove_follow_menu = function() {
+var remove_follow_menu = function(user_id) {
 	$("div#follow_menu").remove();
-	$("a.btn.tool_btn[title='Follow User']").attr("onclick", "make_follow_menu();");
+	$("td#follow_user a.btn.tool_btn").attr("onclick", "make_follow_menu("+user_id+");");
 };
 
-var make_follow_menu = function() {
-	let follow_btn = $("a.btn.tool_btn[title='Follow User']");
-	let follow_js = "let r = function(){"+follow_btn.attr("onclick")+"}();remove_follow_menu();return r;";
+var make_follow_menu = function(user_id) {
+	let follow_btn = $("td#follow_user a.btn.tool_btn");
 	let follow_menu = $(`<div id='follow_menu' style='position: absolute; margin-top: 1rem;'>
 		<ul style='text-align: start; list-style: none;'>
 			<li>
-				<a id='follow_public' class='btn tool_btn' style='color:var(--btn-secondary-text);background:var(--btn-secondary-background-default);' onclick="` + follow_js + `"></a>
+				<a id='follow_public' class='btn tool_btn' style='color:var(--btn-secondary-text);background:var(--btn-secondary-background-default);' onclick=""></a>
 			</li>
 			<li>
 				<a id='follow_private' class='btn tool_btn' style='color: var(--btn-secondary-text); background: var(--btn-secondary-background-default);' onclick=''></a>
@@ -74,35 +73,34 @@ var make_follow_menu = function() {
 		</ul>
 	</div>`);
 	
-	// come up with a better test
-	if (follow_js.includes("Are you sure you want to follow this user?")) {
-		follow_menu.find('a#follow_public').text('follow publicly');
+	if (follow_btn.attr("title").includes("Follow User")) {
+		follow_menu.find('a#follow_public').text('follow publicly').attr("onclick", "if( confirm('Are you sure you want to follow this user?')) {rym.request.post('FollowFollowUser',{user_id:"+user_id+"}, null, 'script');} return false;");
 	} else {
-		follow_menu.find('a#follow_public').text('unfollow publicly');
+		follow_menu.find('a#follow_public').text('unfollow publicly').attr("onclick", "if( confirm('Unfollow this user?')) {rym.request.post('FollowUnfollowUser',{user_id:"+user_id+"}, null, 'script');} return false;");
 	}
 	
 	let u = $("span#profilename").text();
 	ldb.get("__pfollow_users", function(v){
 		if(v === null){
-			follow_menu.find('a#follow_private').attr("onclick", 'ldb.set("__pfollow_users", ['+u+']);remove_follow_menu();');
+			follow_menu.find('a#follow_private').attr("onclick", "ldb.set('__pfollow_users', ['"+u+"']);remove_follow_menu("+user_id+");");
 		} else {
 			if (v.includes(u)) {
-				follow_menu.find('a#follow_private').attr("onclick", 'ldb.set("__pfollow_users", '+JSON.stringify(v)+'.filter(e => e !== '+u+'));remove_follow_menu();').text("unfollow privately");
+				follow_menu.find('a#follow_private').attr("onclick", "ldb.set('__pfollow_users', "+JSON.stringify(v)+".filter(e => e !== '"+u+"'));remove_follow_menu("+user_id+");").text("unfollow privately");
 			} else {
-				follow_menu.find('a#follow_private').attr("onclick", 'ldb.set("__pfollow_users", '+JSON.stringify(v)+'.concat(['+u+']));remove_follow_menu();').text("follow privately");
+				follow_menu.find('a#follow_private').attr("onclick", "ldb.set('__pfollow_users', "+JSON.stringify(v)+".concat(['"+u+"']));remove_follow_menu("+user_id+");").text("follow privately");
 			}
 		}
 	});
 	
 	follow_btn.parent().append(follow_menu);
-	follow_btn.attr("onclick", "remove_follow_menu();");
+	follow_btn.attr("onclick", "remove_follow_menu("+user_id+");");
 };
 
 var rymboxset = /http(s|):\/\/rateyourmusic.com\/list\/[A-Za-z0-9_]+\/rym[-_](ultimate[-_]|)box[-_]set/;
 var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 
 window.addEventListener('DOMContentLoaded', function() {
-//	setTimeout(function() {
+	
 	console.log("hey"); // bunch of aesthetic changes here that i couldnt do or would be annoying to do with css
 
 	// forgot what this does but its def something important. leave it here
@@ -189,7 +187,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			</div>
 		</div>`).insertAfter("div#content style:first");
 	}
-	if (!window.location.href.includes("://rateyourmusic.com/account/friends/") {
+	if (!window.location.href.includes("://rateyourmusic.com/account/friends/")) {
 		$("a").each(function() {
 			if (rymboxset.test(this.href)) {
 				getBox($(this)).remove();
@@ -204,12 +202,44 @@ window.addEventListener('DOMContentLoaded', function() {
 	}
 
 	if (window.location.href.includes("://rateyourmusic.com/~")) {
+		let user_id = $("td a#block").attr("data-user-id");
+		
+		var oldfetch = window.fetch;
+		window.fetch = async (...args) => {
+			console.log("fetch called with", ...args);
+			const oldresponse = await oldfetch(...args);
+			console.log(oldresponse);
+
+			var n = await oldresponse
+			.clone()
+			.text()
+			.then(body => {
+				console.log("intercepted response:", JSON.stringify(body));
+				console.log(body == "$('#follow_user').html('<a title=\"Follow User\" onClick=\"if( confirm(\\'Are you sure you want to follow this user?\\')) {rym.request.post(\\'FollowFollowUser\\',{user_id:"+user_id+"}, null, \\'script\\');} return false;\" class=\"btn tool_btn\" style=\"\">+</a>');");
+				console.log(body == "$('#follow_user').html('<a title=\"You are following this user; click to unfollow.\" onClick=\"if( confirm(\\'Unfollow this user?\\')) {rym.request.post(\\'FollowUnfollowUser\\',{user_id:"+user_id+"}, null, \\'script\\');} return false;\" class=\"btn tool_btn\" style=\"cursor:pointer;background:var(--gen-blue-dark);;color:var(--mono-f);\">+</a>');");
+				if (body == "$('#follow_user').html('<a title=\"Follow User\" onClick=\"if( confirm(\\'Are you sure you want to follow this user?\\')) {rym.request.post(\\'FollowFollowUser\\',{user_id:"+user_id+"}, null, \\'script\\');} return false;\" class=\"btn tool_btn\" style=\"\">+</a>');") {
+					return "$('#follow_user').html('<a title=\"Follow User\" onClick=\"make_follow_menu("+user_id+");\" class=\"btn tool_btn\" style=\"\">+</a>');";
+				} else if (body == "$('#follow_user').html('<a title=\"You are following this user; click to unfollow.\" onClick=\"if( confirm(\\'Unfollow this user?\\')) {rym.request.post(\\'FollowUnfollowUser\\',{user_id:"+user_id+"}, null, \\'script\\');} return false;\" class=\"btn tool_btn\" style=\"cursor:pointer;background:var(--gen-blue-dark);;color:var(--mono-f);\">+</a>');") {
+					return "$('#follow_user').html('<a title=\"You are following this user; click to unfollow.\" onClick=\"make_follow_menu("+user_id+");\" class=\"btn tool_btn\" style=\"cursor:pointer;background:var(--gen-blue-dark);;color:var(--mono-f);\">+</a>')"
+				}
+				return body;
+			}).catch(err => console.error(err));
+
+			return {
+				ok: true,
+				status: 200,
+				text: async () => n
+			};
+		};
+	
 		window.make_follow_menu = make_follow_menu;
 		window.remove_follow_menu = remove_follow_menu;
-		window.refresh_follow_menu = refresh_follow_menu;
+		window.refresh_follow_menu = function(){
+			window.remove_follow_menu(user_id);
+			window.make_follow_menu(user_id);
+		};
 		
 		console.log("usr");
-		$("a.btn.tool_btn[title='Follow User']").attr("onclick", "make_follow_menu();");
+		$("td#follow_user a.btn.tool_btn").attr("onclick", "make_follow_menu("+user_id+");");
 	}
-//	}, 5000);
 });
