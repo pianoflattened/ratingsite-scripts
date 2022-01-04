@@ -96,11 +96,33 @@ var make_follow_menu = function(user_id) {
 	follow_btn.attr("onclick", "remove_follow_menu("+user_id+");");
 };
 
+var index_public_follows = function() {
+	window.public_follows_usernames = []; 
+	window.public_follows.each(function(i, e) {
+		window.public_follows_usernames.push(
+			$(e).find("a.user").text()
+		); 
+	}); 
+	
+	ldb.set("__follows", window.public_follows_usernames);
+	ldb.get("__follows", function(v) {
+		if (v === null) {
+			ldb.set("__follows", []);
+			v=[];
+		}
+		$("span#pf_counter").text("("+JSON.stringify(v.length)+"/"+JSON.stringify(window.public_follows.length)+")");
+	});
+}
+
 var rymboxset = /http(s|):\/\/rateyourmusic.com\/list\/[A-Za-z0-9_]+\/rym[-_](ultimate[-_]|)box[-_]set/;
 var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 
 window.addEventListener('DOMContentLoaded', function() {
+	window.jQuery.fn.textNodes=function(){return this.contents().filter(function(){return (this.nodeType===Node.TEXT_NODE&&this.nodeValue.trim()!=="");});};
 	
+	/* 
+	 * AESTHETIC STUFF
+	 * * * * * * * * * */
 	console.log("hey"); // bunch of aesthetic changes here that i couldnt do or would be annoying to do with css
 
 	// forgot what this does but its def something important. leave it here
@@ -118,7 +140,10 @@ window.addEventListener('DOMContentLoaded', function() {
 
 	$("img[src=\"https://www.gstatic.com/images/icons/material/system/1x/warning_amber_24dp.png\"]").remove();
 	
-	// !! place everything under INSIDE here
+	
+	/*
+	 * REMOVE RYM BOX SET
+	 * * * * * * * * * * */
 	if (rymboxset.test(window.location.href)) {
 		$(`<div class="overlay" id="genre_vote_abuse_banner">
 			<div class="abuse_banner">
@@ -152,11 +177,22 @@ window.addEventListener('DOMContentLoaded', function() {
 		});
 	}
 	
-	// thank you jquery
+	
+	/*
+	 * REMOVE FEATURED REVIEWS
+	 * * * * * * * * * * * * * */
 	if (window.location.href.includes("://rateyourmusic.com/release")) {
 		$(".review:has(.review_featured)").remove(); // lol maybe move it instead
 	}
 
+
+	/*
+	 * PRIVATE FOLLOWS
+	 * * * * * * * * * */
+	// TODO: make this work for films too
+	// add private follows 2 influence contacts_edit to turn film/music on/off 
+	 
+	// adds private follow button on user pages
 	if (window.location.href.includes("://rateyourmusic.com/~")) {
 		let user_id = $("td a#block").attr("data-user-id");
 		
@@ -193,5 +229,89 @@ window.addEventListener('DOMContentLoaded', function() {
 		
 		console.log("usr");
 		$("td#follow_user a.btn.tool_btn").attr("onclick", "make_follow_menu("+user_id+");");
+	}
+	
+	// catching chart requests and modifying them to add private follow influence
+	// TODO: on chart reload keep settings from previous chart aesthetically
+	if (window.location.href.includes("://rateyourmusic.com/charts")) {
+		$("#page_chart_query_advanced_users_following").parent().textNodes().last().replaceWith(" I'm following publicly\n");
+		$(`<label class="page_chart_query_radio_label">
+			<input id="page_chart_query_advanced_users_private_following" type="checkbox"> I'm following privately
+		</label>`).insertAfter("label:has(#page_chart_query_advanced_users_following)");
+		$(`<br>`).insertAfter("div.advanced_section_option_users");
+		
+		window.RYMchart.onClickCreateChart = function() {
+			ldb.get("__pfollow_users", function(v) {
+				if (v === null) {
+					ldb.set("__pfollow_users", []);
+					v = [];
+				}
+				
+				if ($("#page_chart_query_advanced_users_private_following").is(":checked");) {
+					window.RYMchart.state.users_urls = window.RYMchart.state.users_urls.concat(v);
+				}
+
+				$("#page_chart_query_error").hide(),
+				$.ajax({ url: "/api/1/chart/url/", data: { chart: JSON.stringify(window.RYMchart.state) }, type: "POST", dataType: "json", async: !0 }).done(function (e) {
+					if (e.status === "success") {
+						//alert(JSON.stringify(e)); // debug line
+						window.location = e.url;
+					} else {
+						window.RYMchart.showErrors(e.errors);
+					}
+				});
+			});
+		}
+	}
+	
+	// list of privately followed users on friends page
+	if (window.location.href.includes("://rateyourmusic.com/friends/")) {
+		$("span.ookiig").text("Users you follow publicly");
+		let private_following_list = $(`<div style="padding:23px;" id="private_following_list">
+			<div class="clear"></div>
+			<span class="ookiig">Users you follow privately</span>
+			<hr noshade="noshade">
+			<div class="clear"></div>
+		</div>`);
+		
+		ldb.get("__pfollow_users", function(v) {
+			for (i = 0; i < v.length; i++) {
+				if (v[i] !== "") {
+					private_following_list.append(`<div class="or_card_frame">
+						<div class="or_card_frame_inner">
+							<span class="card_link">
+								<a class="user" href="/~`+v[i]+`">`+v[i]+`</a>
+							</span>
+						</div>
+					</div>`);
+				}
+			}
+		});
+
+		$("div.bubble_content > div:has(span.ookiig)").attr("id", "public_following_list");
+		$(`<div class="clear" id="b4pfl"></div>`).insertAfter("div.bubble_content > div:has(span.ookiig)");
+		private_following_list.insertAfter("div#b4pfl");
+		$(`<div style="padding:10px;"></div>`).insertAfter("#private_following_list");
+	}
+
+	// button to save all public following w influence in ldb
+	// TODO: catch musical influence on/off requests and change list accordingly automatically
+	if (window.location.href.includes("://rateyourmusic.com/account/contacts_edit")) {
+		window.index_public_follows = index_public_follows;
+
+		$("p.small").wrap(`<div id="v3odk" style="display: flex; justify-content: space-between; width: 90%;"></div>`);
+		$("#v3odk").append(`<div><a id="index_public_follows">index public follows </a><span id="pf_counter"></span></div>`);
+		
+		window.public_follows = $("table.mbgen").last().find("tr:has(img[id^=influence][alt^=on])");
+		ldb.get("__follows", function(v) {
+			if (v === null) {
+				ldb.set("__follows", []);
+				v = [];
+			}
+			
+			$("span#pf_counter").text("("+JSON.stringify(v.length)+"/"+JSON.stringify(window.public_follows.length)+")");
+		});
+		
+		$("a#index_public_follows").attr("onclick", "window.index_public_follows();");
 	}
 });
