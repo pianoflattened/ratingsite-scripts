@@ -115,17 +115,15 @@ var index_public_follows = function() {
 }
 
 var rymboxset = /http(s|):\/\/rateyourmusic.com\/list\/[A-Za-z0-9_]+\/rym[-_](ultimate[-_]|)box[-_]set/;
-var rymQre = /rymQ\(\s*function\(\)\s*{\s*(.*)\s*}\s*\)/g;
 
 window.addEventListener('DOMContentLoaded', function() {
-	window.jQuery.fn.textNodes=function(){return this.contents().filter(function(){return (this.nodeType===Node.TEXT_NODE&&this.nodeValue.trim()!=="");});};
+	console.log("hey");
 	
 	/* 
 	 * AESTHETIC STUFF
 	 * * * * * * * * * */
-	console.log("hey"); // bunch of aesthetic changes here that i couldnt do or would be annoying to do with css
 
-	// forgot what this does but its def something important. leave it here
+	// forgot exactly what this is for but im just changing some colors here dont worry too much about it. may be something about the wiki
 	$(':root').css('--ui-detail-neutral', '#4a4c52').css('--ui-divider-line', '#4a4c52');
 	
 	// move the charts link bc it switched places with the genre one and i was clicking it habitually
@@ -134,10 +132,12 @@ window.addEventListener('DOMContentLoaded', function() {
 	chartslink.remove();
 	newcharts.insertAfter("div.header_links a.header_item:nth-child(2)");
 	
+	// search results look weird centered - this moves them to the left
 	if (window.location.href.includes("://rateyourmusic.com/search")) {
 		$('column_container_left').removeClass("large-8");
 	}
 
+	// i hate how this icon looks lol. it is a warning icon though so like if you want it you can keep it
 	$("img[src=\"https://www.gstatic.com/images/icons/material/system/1x/warning_amber_24dp.png\"]").remove();
 	
 	
@@ -234,6 +234,8 @@ window.addEventListener('DOMContentLoaded', function() {
 	// catching chart requests and modifying them to add private follow influence
 	// TODO: on chart reload keep settings from previous chart aesthetically
 	if (window.location.href.includes("://rateyourmusic.com/charts")) {
+		window.jQuery.fn.textNodes=function(){return this.contents().filter(function(){return (this.nodeType===Node.TEXT_NODE&&this.nodeValue.trim()!=="");});};
+		
 		$("#page_chart_query_advanced_users_following").parent().textNodes().last().replaceWith(" I'm following publicly\n");
 		$(`<label class="page_chart_query_radio_label">
 			<input id="page_chart_query_advanced_users_private_following" type="checkbox"> I'm following privately

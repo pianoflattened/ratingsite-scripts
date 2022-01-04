@@ -1,26 +1,16 @@
+// https://github.com/DVLP/localStorageDB
+!function(){var r,c,e=window.indexedDB||window.mozIndexedDB||window.webkitIndexedDB||window.msIndexedDB;e?(c={k:"",v:""},(e=e.open("d2",1)).onsuccess=function(e){r=this.result},e.onerror=function(e){console.error("indexedDB request error"),console.log(e)},e.onupgradeneeded=function(e){r=null,e.target.result.createObjectStore("s",{keyPath:"k"}).transaction.oncomplete=function(e){r=e.target.db}},window.ldb={get:function e(t,n){r?r.transaction("s").objectStore("s").get(t).onsuccess=function(e){e=e.target.result&&e.target.result.v||null,n(e)}:setTimeout(function(){e(t,n)},100)},set:function(e,t,n){c.k=e,c.v=t;let o=r.transaction("s","readwrite");o.oncomplete=function(e){"Function"==={}.toString.call(n).slice(8,-1)&&n()},o.objectStore("s").put(c),o.commit()}}):console.error("indexDB not supported")}();
+
 // jquery
 var $ = window.$;
 
-// !! place everything under OUTSIDE here
+// !! place everything under OUTSIDE below
 
-window.addEventListener('DOMContentLoaded', setTimeout(function() {
-    console.log("hey"); // bunch of aesthetic changes here that i couldnt do or would be annoying to do with css
 
-	// forgot what this does but its def something important. leave it here
-	$(':root').css('--ui-detail-neutral', '#4a4c52');
-	$(':root').css('--ui-divider-line', '#4a4c52');
-    
-    // move the charts link bc it switched places with the genre one and i was clicking it habitually
-    let chartslink = $("div.header_charts");
-    let newcharts = chartslink.clone(true, true);
-    chartslink.remove();
-    newcharts.insertAfter("div.header_links a.header_item:nth-child(2)");
-    
-    if (window.location.href.includes("rateyourmusic.com/search")) {
-        $('column_container_left').removeClass("large-8");
-	}
-
-    $("img[src=\"https://www.gstatic.com/images/icons/material/system/1x/warning_amber_24dp.png\"]").remove();
-    
-    // !! place everything under INSIDE here
-}), 5000);
+window.addEventListener('DOMContentLoaded', function() {
+	console.log("hey");
+	
+	// !! place everything under INSIDE below
+	
+	
+});
