@@ -505,3 +505,14 @@ td#follow_user a[title^=Follow] {
 .review:has(.review_featured) {
 	display: none;
 }
+
+textarea#user_notes {
+	padding: 5px;
+	border: none;
+	resize: vertical;
+	outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
