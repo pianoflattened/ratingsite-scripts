@@ -192,6 +192,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		$(".review:has(.review_featured)").remove(); // lol maybe move it instead
 	}
 	
+	
 	/* 
 	 * USER NOTES
 	 * * * * * * */

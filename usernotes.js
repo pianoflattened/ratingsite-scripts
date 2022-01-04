@@ -6,7 +6,6 @@ var update_user_notes = function(username) {
 	});
 }
 
-
 // INSIDE
 /* 
  * USER NOTES
