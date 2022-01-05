@@ -26,7 +26,7 @@ if (window.location.href.includes("://rateyourmusic.com/~")) {
 		</div>`);
 		
 		ldb.get("__notes", function(v) {
-			notes.find("textarea#user_notes").value = v;
+			notes.find("textarea#user_notes").value = v[$("span#profilename").text()];
 			$("td:has(div.profilehii) + td div").append(notes);
 		});
 	}
