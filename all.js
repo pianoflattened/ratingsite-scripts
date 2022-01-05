@@ -212,7 +212,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			</div>`);
 			
 			ldb.get("__notes", function(v) {
-				notes.find("textarea#user_notes").val() = v[$("span#profilename").text()];
+				notes.find("textarea#user_notes").val(v[$("span#profilename").text()]);
 				$("td:has(div.profilehii) + td div").append(notes);
 			});
 		}
