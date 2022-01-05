@@ -223,7 +223,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			} else {
 				ldb.get("__notes", function(v) {
 					notes.find("textarea#user_notes").val(v[username]);
-					$("td:has(div.profilehii) + td div").append(notes);
+					$("td:has(div.profilehii) + td div").last().append(notes);
 				});
 			}
 		}
