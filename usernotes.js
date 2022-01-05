@@ -4,7 +4,7 @@ var update_user_notes = function() {
 		if (v === null) {
 			v = {};
 		}
-		v[username] = $("textarea#user_notes").val();
+		v[$('span#profilename').text()] = $("textarea#user_notes").val();
 		ldb.set("__notes", v);
 	});
 }
@@ -22,7 +22,7 @@ if (window.location.href.includes("://rateyourmusic.com/~")) {
 			<span style="font-weight: bold;">[<a onclick="$('textarea#user_notes').is(':disabled') ? $('textarea#user_notes').removeAttr('disabled') : $('textarea#user_notes').attr('disabled', '');">edit</a>]</span>
 		</div>
 		<div class="venuebox" style="padding: 0; border: 1px var(--mono-c) solid;">
-			<textarea disabled id="user_notes" oninput="window.update_user_notes($('span#profilename').text())"></textarea>
+			<textarea disabled id="user_notes" oninput="window.update_user_notes();"></textarea>
 		</div>`);
 		
 		ldb.get("__notes", function(v) {

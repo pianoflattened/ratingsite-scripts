@@ -208,7 +208,7 @@ window.addEventListener('DOMContentLoaded', function() {
 				<span style="font-weight: bold;">[<a onclick="$('textarea#user_notes').is(':disabled') ? $('textarea#user_notes').removeAttr('disabled') : $('textarea#user_notes').attr('disabled', '');">edit</a>]</span>
 			</div>
 			<div class="venuebox" style="padding: 0; border: 1px var(--mono-c) solid;">
-				<textarea disabled id="user_notes" oninput="window.update_user_notes()"></textarea>
+				<textarea disabled id="user_notes" oninput="window.update_user_notes();"></textarea>
 			</div>`);
 			
 			ldb.get("__notes", function(v) {
