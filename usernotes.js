@@ -29,6 +29,7 @@ if (window.location.href.includes("://rateyourmusic.com/~")) {
 		
 		if ($("div.note:has(a#block)").length >= 1) {
 			ldb.get("__notes", function(v) {
+				notes.css("max-width", "33%;");
 				notes.find("textarea#user_notes").val(v[username]);
 				$("div.note:has(a#block)").parent().append(notes);
 			});
