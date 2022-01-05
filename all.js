@@ -116,6 +116,9 @@ var index_public_follows = function() {
 
 var update_user_notes = function(username) {
 	ldb.get("__notes", function(v) {
+		if (v === null) {
+			v = {};
+		}
 		v[username] = $("textarea#user_notes").value;
 		ldb.set("__notes", v);
 	});
@@ -199,14 +202,19 @@ window.addEventListener('DOMContentLoaded', function() {
 	if (window.location.href.includes("://rateyourmusic.com/~")) {
 		window.update_user_notes = update_user_notes;
 		
-		if (!$("div#allNotifications").length) {
-			$("td:has(div.profilehii) + td div").append($(`<div style="margin: 0 0.5em; display: flex; justify-content: space-between;">
+		if ($("div#allNotifications").length == 0) {
+			let notes = $(`<div style="margin: 0 0.5em; display: flex; justify-content: space-between;">
 				<span>notes</span>
-				<span style="font-weight: bold;">[<a>edit</a>]</span>
+				<span style="font-weight: bold;">[<a onclick="$('textarea#user_notes').is(':disabled') ? $('textarea#user_notes').removeAttr('disabled') : $('textarea#user_notes').attr('disabled', '');">edit</a>]</span>
 			</div>
 			<div class="venuebox" style="padding: 0; border: 1px var(--mono-c) solid;">
-				<textarea id="user_notes" oninput="window.updateUserNotes($('span#profilename').text())"></textarea>
-			</div>`));
+				<textarea disabled id="user_notes" oninput="window.update_user_notes($('span#profilename').text())"></textarea>
+			</div>`);
+			
+			ldb.get("__notes", function(v) {
+				notes.find("textarea#user_notes").value = v;
+				$("td:has(div.profilehii) + td div").append(notes);
+			});
 		}
 	}
 
