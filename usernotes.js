@@ -27,7 +27,7 @@ if (window.location.href.includes("://rateyourmusic.com/~")) {
 			<textarea disabled id="user_notes" oninput="window.update_user_notes('`+username+`');"></textarea>
 		</div>`);
 		
-		if ($("div.note:has(a#block)").length > 1) {
+		if ($("div.note:has(a#block)").length >= 1) {
 			ldb.get("__notes", function(v) {
 				notes.find("textarea#user_notes").val(v[username]);
 				$("div.note:has(a#block)").parent().append(notes);
