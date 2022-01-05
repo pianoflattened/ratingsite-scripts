@@ -114,12 +114,12 @@ var index_public_follows = function() {
 	});
 }
 
-var update_user_notes = function(username) {
+var update_user_notes = function() {
 	ldb.get("__notes", function(v) {
 		if (v === null) {
 			v = {};
 		}
-		v[username] = $("textarea#user_notes").value;
+		v[$('span#profilename').text()] = $("textarea#user_notes").val();
 		ldb.set("__notes", v);
 	});
 }
@@ -208,11 +208,11 @@ window.addEventListener('DOMContentLoaded', function() {
 				<span style="font-weight: bold;">[<a onclick="$('textarea#user_notes').is(':disabled') ? $('textarea#user_notes').removeAttr('disabled') : $('textarea#user_notes').attr('disabled', '');">edit</a>]</span>
 			</div>
 			<div class="venuebox" style="padding: 0; border: 1px var(--mono-c) solid;">
-				<textarea disabled id="user_notes" oninput="window.update_user_notes($('span#profilename').text())"></textarea>
+				<textarea disabled id="user_notes" oninput="window.update_user_notes()"></textarea>
 			</div>`);
 			
 			ldb.get("__notes", function(v) {
-				notes.find("textarea#user_notes").value = v[$("span#profilename").text()];
+				notes.find("textarea#user_notes").val() = v[$("span#profilename").text()];
 				$("td:has(div.profilehii) + td div").append(notes);
 			});
 		}

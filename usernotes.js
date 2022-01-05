@@ -1,10 +1,10 @@
 // OUTSIDE
-var update_user_notes = function(username) {
+var update_user_notes = function() {
 	ldb.get("__notes", function(v) {
 		if (v === null) {
 			v = {};
 		}
-		v[username] = $("textarea#user_notes").value;
+		v[username] = $("textarea#user_notes").val();
 		ldb.set("__notes", v);
 	});
 }
@@ -26,7 +26,7 @@ if (window.location.href.includes("://rateyourmusic.com/~")) {
 		</div>`);
 		
 		ldb.get("__notes", function(v) {
-			notes.find("textarea#user_notes").value = v[$("span#profilename").text()];
+			notes.find("textarea#user_notes").val() = v[$("span#profilename").text()];
 			$("td:has(div.profilehii) + td div").append(notes);
 		});
 	}
