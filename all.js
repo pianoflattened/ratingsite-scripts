@@ -6,7 +6,7 @@ var $ = window.$;
 
 var username_from_href = function() {
 	let spl = window.location.href.split("~");
-	return spl[spl.length-1];
+	return spl[spl.length-1].trim();
 };
 
 var sleep = function (ms) {
@@ -171,7 +171,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	window.export_ldb = function() { // this will not get you anything beyond __notes, __follows, __pfollow_users
 		$("div#export_message").remove();
 		
-		let ldb_keys = ["__notes", "__follows", "__pfollow_users"];
+		let ldb_keys = ["__notes", "__follows", "__pfollow_users", "__muted"];
 		let read_ldb = function(keys, finish, o={}) {
 			let k = keys.shift();
 			ldb.get(k, function(v) {
@@ -309,6 +309,75 @@ window.addEventListener('DOMContentLoaded', function() {
 				ldb.get("__notes", function(v) {
 					notes.find("textarea#user_notes").val(v[user_id]);
 					$("td:has(div.profilehii) + td div").first().append(notes);
+				});
+			}
+		}
+	}
+	
+	/* 
+	 * MUTING USERS / COMMENT BOXES 
+	 * * * * * * * * * * * * * * * */
+	 
+	window.mute_user = function(from, user) {
+		if (from == "comment") {
+			if (confirm("mute "+user+"?")) {
+				ldb.get("__muted", function(v) {
+					if (v === null) v = [];
+					ldb.set("__muted", v.concat($(user)));
+					$(".comment:has(.comment_header a.user:contains('"+user+"'))").remove();
+				});
+			}
+		} else if (from == "user") {
+			if (confirm("mute "+user+"?")) {
+				ldb.get("__muted", function(v) {
+					if (v === null) v = [];
+					ldb.set("__muted", v.concat($(user)));
+					$("a#mute_user").css({
+						background: "var(--ui-detail-primary)",
+						color: "var(--text-white)"
+					}).attr("onclick", "window.unmute_user("+JSON.stringify(user)+")");
+				});
+			}
+		}
+	};
+	
+	window.unmute_user = function(user) {
+		if (confirm("unmute "+user+"?")) {
+			ldb.get("__muted", function(v) {
+				ldb.set("__muted", v.filter(e => e != user));
+				$("a#mute_user").attr("style", "");
+			});
+		}
+	}
+	
+	if (window.location.href.includes("://rateyourmusic.com/release/")) {
+		ldb.get("__muted", function(v) {
+			if (v === null) v = [];
+			
+			$(".comment:has(.comment_header a.user)").each(function() {
+				let username = $(this).find(".comment_header a.user").text();
+				if (v.includes(username)) {
+					$(this).remove();
+				} else {
+					$(this).find(".comment_mod").append($(`<span onclick="window.mute_user('comment', `+JSON.stringify(username)+`)" class="icon-outline">🔇</span>`));
+				}
+			});
+		});
+	}
+	
+	// background:var(--ui-detail-primary);color:var(--text-white);
+	if (window.location.href.includes("://rateyourmusic.com/~")) {
+		let username = username_from_href();
+		
+		ldb.get("__muted", function(v)) {
+			$("td#follow_user").after($(`<td>
+				<a id="mute_user" class="btn tool_btn" onclick="window.mute_user('user', `+JSON.stringify(username)+`);">🔇</a>
+			</td>`));
+			
+			if (v.includes(username)) {
+				$("a#mute_user").css({
+					background: "var(--ui-detail-primary)",
+					color: "var(--text-white)"
 				});
 			}
 		}
@@ -597,7 +666,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	
 	// pfollow rates
 	// add rss setting to turn this off
-	if (window.location.href.includes("://rateyourmusic.com/release/")) {
+	if (window.location.href.includes("://rateyourmusic.com/release/") && false) { // will continue working on this later i do not want to do this rn
 		$("div.section_catalog span.navspan").wrapInner($(`<div style="display:flex;justify-content:space-between;"><div id="release_navbuttons"></div></div>`));
 		$("div#release_navbuttons").before($(`<a class="navlinknext" id="index_rates" style="width:fit-content;" onclick="window.index_rates();">index rates</a>`));
 		
