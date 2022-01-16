@@ -369,7 +369,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	if (window.location.href.includes("://rateyourmusic.com/~")) {
 		let username = username_from_href();
 		
-		ldb.get("__muted", function(v)) {
+		ldb.get("__muted", function(v) {
 			$("td#follow_user").after($(`<td>
 				<a id="mute_user" class="btn tool_btn" onclick="window.mute_user('user', `+JSON.stringify(username)+`);">🔇</a>
 			</td>`));
@@ -380,7 +380,7 @@ window.addEventListener('DOMContentLoaded', function() {
 					color: "var(--text-white)"
 				});
 			}
-		}
+		});
 	}
 
 
