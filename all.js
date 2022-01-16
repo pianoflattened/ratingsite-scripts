@@ -370,6 +370,8 @@ window.addEventListener('DOMContentLoaded', function() {
 		let username = username_from_href();
 		
 		ldb.get("__muted", function(v) {
+			if (v === null) v = [];
+			
 			$("td#follow_user").after($(`<td>
 				<a id="mute_user" class="btn tool_btn" onclick="window.mute_user('user', `+JSON.stringify(username)+`);">🔇</a>
 			</td>`));
