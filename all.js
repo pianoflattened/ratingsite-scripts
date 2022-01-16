@@ -315,15 +315,15 @@ window.addEventListener('DOMContentLoaded', function() {
 	}
 	
 	/* 
-	 * MUTING USERS / COMMENT BOXES 
-	 * * * * * * * * * * * * * * * */
+	 * MUTING USERS
+	 * * * * * * * */
 	 
 	window.mute_user = function(from, user) {
 		if (from == "comment") {
 			if (confirm("mute "+user+"?")) {
 				ldb.get("__muted", function(v) {
 					if (v === null) v = [];
-					ldb.set("__muted", v.concat($(user)));
+					ldb.set("__muted", v.concat(user));
 					$(".comment:has(.comment_header a.user:contains('"+user+"'))").remove();
 				});
 			}
@@ -331,7 +331,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			if (confirm("mute "+user+"?")) {
 				ldb.get("__muted", function(v) {
 					if (v === null) v = [];
-					ldb.set("__muted", v.concat($(user)));
+					ldb.set("__muted", v.concat(user));
 					$("a#mute_user").css({
 						background: "var(--ui-detail-primary)",
 						color: "var(--text-white)"
@@ -345,7 +345,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		if (confirm("unmute "+user+"?")) {
 			ldb.get("__muted", function(v) {
 				ldb.set("__muted", v.filter(e => e != user));
-				$("a#mute_user").attr("style", "");
+				$("a#mute_user").attr("style", "").attr("onclick", "window.mute_user('user', '"+user+"')");
 			});
 		}
 	}
@@ -359,13 +359,12 @@ window.addEventListener('DOMContentLoaded', function() {
 				if (v.includes(username)) {
 					$(this).remove();
 				} else {
-					$(this).find(".comment_mod").append($(`<span onclick="window.mute_user('comment', `+JSON.stringify(username)+`)" class="icon-outline">🔇</span>`));
+					$(this).find(".comment_mod").append($(`<span onclick="window.mute_user('comment', '`+username+`')">🔇</span>`));
 				}
 			});
 		});
 	}
 	
-	// background:var(--ui-detail-primary);color:var(--text-white);
 	if (window.location.href.includes("://rateyourmusic.com/~")) {
 		let username = username_from_href();
 		
@@ -373,7 +372,7 @@ window.addEventListener('DOMContentLoaded', function() {
 			if (v === null) v = [];
 			
 			$("td#follow_user").after($(`<td>
-				<a id="mute_user" class="btn tool_btn" onclick="window.mute_user('user', `+JSON.stringify(username)+`);">🔇</a>
+				<a id="mute_user" class="btn tool_btn" onclick="window.mute_user('user', '`+username+`');">🔇</a>
 			</td>`));
 			
 			if (v.includes(username)) {
