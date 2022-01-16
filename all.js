@@ -690,7 +690,7 @@ window.addEventListener('DOMContentLoaded', function() {
 						//RYMmediaPage.navCatalog('l', release_id, true, 'ratings', '/'+JSON.stringify(i+1));
 						// i have to wait for the response here - maybe just watch the page for an update like a user would
 						// google this
-						await sleep(Math.random(21, 67));
+						//await sleep(Math.random(21, 67));
 					}
 					$("div.catalog_line:not(:has(div.catalog_header.friend))").each(function(_, e) {
 						if (!$(e).is(".my_rating")) {
@@ -698,7 +698,7 @@ window.addEventListener('DOMContentLoaded', function() {
 								// probably need to make a second section for pfollow rates. fine
 							}
 						}
-						await sleep(Math.random(21, 67));
+						//await sleep(Math.random(21, 67));
 					});
 					first = false;
 				});
