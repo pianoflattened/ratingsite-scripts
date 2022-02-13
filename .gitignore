@@ -1,3 +1,5 @@
 zipem
 *.zip
 *.txt
+*.py
+*.min.js
