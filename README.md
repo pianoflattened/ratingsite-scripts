@@ -32,3 +32,6 @@ i do not have the time 2 compartamentalize the marginally volumous css but the m
 - paste the result into whatever browser script thing yr using
 
 it is exactly six steps easy, so pretty easy
+
+# upd8 i lost all my files and have a mysterious renewed conviction to push to this repo again
+first thing to do is put everything in my js into a document onload so the css can get on there instantaneously
