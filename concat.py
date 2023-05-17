@@ -2,14 +2,14 @@ build = []
 with open("build.list") as build_list:
     build = build_list.read().split()
 
-with open("main.js") as main:
+with open("src/main.js") as main:
     main_contents = main.read()
 
 main_outside = ""
 main_inside = ""
 
 for filename in build:
-    with open(filename) as file:
+    with open("src/"+filename) as file:
         contents = file.read()
         outside, inside = contents.split("// INSIDE")
         outside = outside.replace("// OUTSIDE\n", "")
@@ -20,5 +20,5 @@ for filename in build:
 main_contents = main_contents.replace("// !! place everything under OUTSIDE below", main_outside)
 main_contents = main_contents.replace("// !! place everything under INSIDE below", main_inside)
 
-with open("all.js", "w+") as main:
+with open("build/all.js", "w+") as main:
     main.write(main_contents)

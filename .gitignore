@@ -1,3 +1,3 @@
-all.min.js
-all.js
-privatefollows.js
+build/all.min.js
+build/all.js
+src/privatefollows.js
