@@ -66,7 +66,7 @@ var index_public_follows = function() {
 // add private follows 2 influence contacts_edit to turn film/music on/off 
  
 // adds private follow button on user pages
-if (window.location.href.includes("://rateyourmusic.com/~")) {
+if (window.location.href.includes("://rateyourmusic.com/~") && false) {
 	let user_id = $("td a#block").attr("data-user-id");
 	
 	var oldfetch = window.fetch;
