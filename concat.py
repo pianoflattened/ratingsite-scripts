@@ -5,6 +5,10 @@ with open("build.list") as build_list:
 with open("src/main.js") as main:
     main_contents = main.read()
 
+import os
+if not os.path.exists("./build"):
+    os.makedirs("./build")
+
 main_outside = ""
 main_inside = ""
 
