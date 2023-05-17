@@ -14,7 +14,7 @@ customizations i use for rym. theyre kind of evil sorry. ive been maintaining th
 \- removes rym box set lists. self explanatory<br>
 
 ## building
-`./build.sh`! and then check "all.min.js". style.css doesn't need any build process lol. very easy
+`./build.sh`! the resulting code will appear in `all.min.js`. `style.css` doesn't need any build process lol. very easy
 
 i used [user javascript and css](https://chrome.google.com/webstore/detail/user-javascript-and-css/nbhcbdghjpllgmfilhnhkllmkecfmpld) on chrome. when i (finally lol) swtiched to firefox i used [codeinjector](https://addons.mozilla.org/en-US/firefox/addon/codeinjector/). it likely does not matter which one you use as long as you can figure out how (i will not be telling you). turn off "on page load" or anything similar
 
