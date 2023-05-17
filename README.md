@@ -24,6 +24,3 @@ https://cdn.jsdelivr.net/gh/pianoflattened/ratingsite-scripts@v1.0.2/style.css <
 
 ## "i only want some features" <--- what to do if you are this guy
 modify the files list in `build.json` and build
-
-# upd8 i lost all my files and have a mysterious renewed conviction to push to this repo again
-first thing to do is put everything in my js into a document onload so the css can get on there instantaneously
