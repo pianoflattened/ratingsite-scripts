@@ -15,3 +15,4 @@ fi
 # go!!!!
 python3 concat.py
 $closurepath ./build/all.js > ./build/all.min.js
+cp src/style.css build/style.css # lol lmao
