@@ -13,23 +13,6 @@ if ! [[ closurepath && $($closurepath --version | grep "Closure Compiler") ]]; t
 	fi
 fi
 
-# concat
-inside=""
-outside=""
-
-set -f # lol
-
-for filename in $(cat build.list); do
-	content=$(cat "noboxset.js")
-	set +f; inside=$inside"${content%%// INSIDE*}"; set -f
-	outside=$outside"${content#$inside}"
-done
-
-cp main.js all.js
-sed -i "s/\/\/ \!\! place everything under OUTSIDE below/$outside" all.js
-sed -i "s/\/\/ \!\! place everything under INSIDE below/$inside" all.js
-
-set +f
-
 # go!!!!
+python3 concat.py
 $closurepath all.js >> all.min.js
