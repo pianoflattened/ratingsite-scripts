@@ -15,4 +15,4 @@ fi
 
 # go!!!!
 python3 concat.py
-$closurepath all.js >> all.min.js
+$closurepath all.js > all.min.js

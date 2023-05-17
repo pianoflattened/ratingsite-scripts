@@ -4,11 +4,17 @@
 // jquery
 var $ = window.$;
 
+// cross-file variables/functions
+var is_release_page = /https:\/\/rateyourmusic\.com\/(release|film)\/.*/.test(window.location.href)
+var is_user_page = /https:\/\/rateyourmusic\.com\/~.*/.test(window.location.href)
+
+var username_from_href = function (){
+	return window.location.href.split("~")[-1]
+}
+
 // !! place everything under OUTSIDE below
 
 window.addEventListener('DOMContentLoaded', function() {
-	console.log("hey");
-	
 	// !! place everything under INSIDE below
 	
 	

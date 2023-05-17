@@ -99,8 +99,7 @@ if (window.location.href.includes("://rateyourmusic.com/~") && false) {
 		window.remove_follow_menu(user_id);
 		window.make_follow_menu(user_id);
 	};
-	
-	console.log("usr");
+
 	$("td#follow_user a.btn.tool_btn").attr("onclick", "make_follow_menu("+user_id+");");
 }
 

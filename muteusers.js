@@ -87,4 +87,3 @@ if (is_user_page) {
 		}
 	});
 }
-console.log("loaded muteusers");
