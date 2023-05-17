@@ -21,7 +21,7 @@ set -f # lol
 
 for filename in $(cat build.list); do
 	content=$(cat "noboxset.js")
-	set +f; inside=$inside"${content%%// INSIDE*}"; set -f;
+	set +f; inside=$inside"${content%%// INSIDE*}"; set -f
 	outside=$outside"${content#$inside}"
 done
 
