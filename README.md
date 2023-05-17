@@ -23,4 +23,4 @@ https://cdn.jsdelivr.net/gh/pianoflattened/ratingsite-scripts@v1.0.2/all.js <br>
 https://cdn.jsdelivr.net/gh/pianoflattened/ratingsite-scripts@v1.0.2/style.css <br>
 
 ## "i only want some features" <--- what to do if you are this guy
-modify the files list in `build.json` and build
+modify `build.list` and run `./build.sh`
