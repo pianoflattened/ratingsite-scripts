@@ -6,7 +6,6 @@ var $ = window.$;
 
 // !! place everything under OUTSIDE below
 
-
 window.addEventListener('DOMContentLoaded', function() {
 	console.log("hey");
 	

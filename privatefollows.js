@@ -122,7 +122,7 @@ if (window.location.href.includes("://rateyourmusic.com/charts")) {
 				v = [];
 			}
 			
-			if ($("#page_chart_query_advanced_users_private_following").is(":checked");) {
+			if ($("#page_chart_query_advanced_users_private_following").is(":checked")) {
 				window.RYMchart.state.users_urls = window.RYMchart.state.users_urls.concat(v);
 			}
 

@@ -1,6 +1,1 @@
-zipem
-*.zip
-*.txt
-*.py
-*.min.js
-*.sh
+all.min.js

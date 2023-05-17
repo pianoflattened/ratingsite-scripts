@@ -6,8 +6,8 @@
  * * * * * * * * * */
 
 // forgot exactly what this is for but im just changing some colors here dont worry too much about it. may be something about the wiki
-$(':root').css('--ui-detail-neutral', '#4a4c52').css('--ui-divider-line', '#4a4c52');
-
+// $(':root').css('--ui-detail-neutral', '#4a4c52').css('--ui-divider-line', '#4a4c52');
+console.log("aesthetic");
 // move the charts link bc it switched places with the genre one and i was clicking it habitually
 let chartslink = $("div.header_charts");
 let newcharts = chartslink.clone(true, true);
