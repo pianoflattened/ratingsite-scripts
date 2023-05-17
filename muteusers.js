@@ -46,7 +46,7 @@ if (is_release_page) {
 				if (v.includes(username)) {
 					t.remove();
 				} else {
-					t.find(".comment_mod:not(:has(span.btn_mute))").prepend($(`<span class="btn_mute" onclick="window.mute_user('comment', '`+username+`')">🔇</span>`));
+					t.find(".comment_mod:not(:has(span.btn_mute))").append($(`<span class="btn_mute" onclick="window.mute_user('comment', '`+username+`')">🔇</span>`));
 				}
 			});
 		} else if (classes.includes("review")) {
@@ -70,9 +70,9 @@ if (is_release_page) {
 }
 
 if (is_user_page) {
-	let username = username_from_href();
-	
 	ldb.get("__muted", function(v) {
+		let username = username_from_href();
+		console.log(username);
 		if (v === null) v = [];
 
 		$("table.mbgen td:has(a#block)").before($(`<td>

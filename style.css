@@ -522,3 +522,20 @@ div.warning {
 	z-index: 1;
 	position: fixed;
 }
+
+input:not([type="button"]):not([readonly]):not([type="submit"]):not(.ui_search_input):not(.review_shortcut), select, textarea, .input_auto_resize_frame, .input_auto_resize_frame:after, .ui_search_type {
+    border: 1px solid var(--mono-d);
+}
+
+.btn, input[type="button"], input[type="submit"] {
+    border: 0;
+}
+
+.comments_list {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.comments_list::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+

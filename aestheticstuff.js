@@ -21,3 +21,7 @@ if (window.location.href.includes("://rateyourmusic.com/search")) {
 
 // i hate how this icon looks lol. it is a warning icon though so like if you want it you can keep it
 $("img[src=\"https://www.gstatic.com/images/icons/material/system/1x/warning_amber_24dp.png\"]").remove();
+
+if (is_release_page) {
+	$(".tcreport_comment_report").each(function() {this.innerHTML = '<i class="far fa-flag"></i>'});
+}
