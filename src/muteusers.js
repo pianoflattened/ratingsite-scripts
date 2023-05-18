@@ -72,7 +72,6 @@ if (is_release_page) {
 if (is_user_page) {
 	ldb.get("__muted", function(v) {
 		let username = username_from_href();
-		console.log(username);
 		if (v === null) v = [];
 
 		$("table.mbgen td:has(a#block)").before($(`<td>
