@@ -65,7 +65,7 @@ if (is_release_page) {
 	};
 	
 	$(".comment:has(.comment_header a.user)")["each"](add_mute_btn);
-	$(".comments")["arrive"](".comment", add_mute_btn);
+	$(".comments")[0]["arrive"](".comment", add_mute_btn);
 	$("div.review")["each"](add_mute_btn);
 }
 
